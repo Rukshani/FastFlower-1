@@ -12,9 +12,7 @@ public class bst {
 class bstTree{
 	bst root;
 	
-	public void addNode(int i){
-		System.out.println("test");
-		
+	public void addNode(int i){		
 		bst node=new bst(i);
 		if (root== null) {
 			root=node;
@@ -50,7 +48,7 @@ class bstTree{
 		int number=0;
 		bst currentNode=root;
 		while(true){
-			System.out.println("test");
+			
 			number++;
 			if (currentNode.info==i) {
 				return number;
@@ -68,7 +66,7 @@ class bstTree{
 	
 	public static void main(String args[]) {
 		bstTree tree=new bstTree();
-		for (int i = 0; i < 100; i=+10) {
+		for (int i = 0; i < 100; i+=10) {
 			tree.addNode(i);
 		}
 		
