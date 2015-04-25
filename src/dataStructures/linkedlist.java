@@ -58,16 +58,18 @@ class intsllist{
 			
 		}else{
 			linkedlist tempo;
-			for (tempo=head; tempo.next !=tail; tempo=tempo.next) {
-				tail=tempo;
-				tail.next=null;
+			for (tempo=head; tempo. next !=tail; tempo=tempo.next) {
+				
 			}
+			tail=tempo;
+			tail.next=null;
 		}
 		 return temp;
 	 }
 	 
 	 public void deleteFromAnyPlace(int el){
 		 if (head==tail && head.info==el) {
+			 head=tail=null;
 
 		 }
 		 else if(head.info==el){

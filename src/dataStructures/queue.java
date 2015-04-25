@@ -1,7 +1,5 @@
 package dataStructures;
 
-import java.util.Iterator;
-
 public class queue {
 
 	private int maxsize;
