@@ -28,8 +28,10 @@
 					</nav>
 					<div id="main">
 					  <article class="panel" id="me" name="me">
-                       	<p>
+					  	
                        	
+                       	<form method="post" action="../deleteproduct.jsp">
+                       	<p>
                         <%        
                         String username=session.getAttribute("usermail").toString();
                         PreparedStatement stv=connection.getcon().prepareStatement("select * from cart where customermail=?");
@@ -41,29 +43,34 @@
         				
         				
         				out.print("<table border=\"1\" width=\"100%\">");
-        				out.print("<tr width=\"100%\"><th width=\"10%\">Item ID</th><th width=\"20%\">Name</th><th width=\"10%\">Price</th><th width=\"10%\">Quantity</th></tr>");
+        				out.print("<tr width=\"100%\"><th width=\"10%\">Order ID</th><th width=\"20%\">Product ID</th><th width=\"10%\">Price</th><th width=\"10%\">Quantity</th><th width=\"10%\">Action</th></tr>");
         				
         				while(rsv.next()){
         					out.print("<tr>");
         					
         					for(int i=1;i<=numberOfColumns;i++){
         						if(i==5){
+        							out.println("<td align=\"center\"><Button name=\"delete\" type=\"submit\" value=\""+rsv.getString(1)+"\" onclick=\"loadXMLDoc()\">Delete</Button></td>");
+        							//System.out.println("orderid: "+rsv.getString(1));
         							continue;
         						}
         						out.print("<td align=\"center\"><font color=\"0000ff\">"+rsv.getString(i)+"</font></td>");
-        						 
-        				}
-        				out.print("</tr>");
-        				
+        					}
+        				out.print("</tr>");        				
         				}
         				out.print("</table>");
-							%> 
-                          </p>
+						%>		
+						</p>					
+					</form>
+					
+					
+					
+                         
 					  </article>
 							<article id="work" class="panel">
 								<header>
 									<h2>Wishlist</h2>
-							  </header>
+							  	</header>
 								
 								<section>
 									<div class="row">

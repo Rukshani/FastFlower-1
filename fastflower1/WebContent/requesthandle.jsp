@@ -1,3 +1,5 @@
+<%@page import="com.sun.org.apache.bcel.internal.generic.RETURN"%>
+<%@page import="javax.annotation.Generated"%>
 <%@page import="org.apache.tomcat.util.buf.UEncoder"%>
 <%@page import="fastflower1.connection"%>
 <%@page import="fastflower1.Item"%>
@@ -23,7 +25,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Request handle</title>
 </head>
 <body>
 
@@ -54,20 +56,22 @@
 	        	
 				System.out.println(" "+c);
 				System.out.println(u+" "+quantity);
-			
+				
+							
 				while(rss.next()){
 					
 					if (c!=null) {
-			            Item myitem = new Item(rss.getString(1),rss.getString(2),rss.getInt(3));
+						
+						
+						Item myitem = new Item(rss.getString(1),rss.getString(2),rss.getInt(3));
 			            value = value + rss.getInt(3);
 			            mycart.add(myitem);
 			            mysession.setAttribute("itemlist", mycart);
 			            mysession.setAttribute("total", value);
-			            st.executeUpdate("INSERT INTO cart VALUES('1',"+rss.getString(1)+","+rss.getString(3)+","+rss.getString(4)+",'"+username+"')");
-						//st.executeUpdate("INSERT INTO cart VALUES("+rss.getString(1)+",'"+rss.getString(2)+"',"+rss.getString(3)+",'"+quantity+"','"+username+"')");
-						/*if(pressdel!=null){
-				        	st.executeUpdate("DELETE FROM cart WHERE number=5");
-						}*/
+			            
+			            st.executeUpdate("INSERT INTO  cart(productID,price,qty,customerMail) VALUES("+rss.getString(1)+","+rss.getString(3)+","+rss.getString(4)+",'"+username+"')");
+							            
+						
 			            response.sendRedirect("customizedproductpage/productpagesession.jsp");
 			       						
 			        }
@@ -90,14 +94,13 @@
 	        } else if (logout != null) {
 	            mysession.invalidate();
 	            response.sendRedirect("logoutprocess.jsp");
+	            
 	        } else if (pressdel != null) {
 
 	            Item item_to_Delete = (Item) mycart.get(Integer.parseInt(pressdel));
 	            value = value - item_to_Delete.price;
 	            mysession.setAttribute("total", value);
-
 	            mycart.remove(Integer.parseInt(pressdel));
-
 	            mysession.setAttribute("tod", pressdel);
 
 	            response.sendRedirect("customizedproductpage/productpagesession.jsp");

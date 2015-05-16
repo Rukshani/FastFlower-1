@@ -1,3 +1,7 @@
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="fastflower1.connection"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="fastflower1.Item"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -30,23 +34,64 @@
                     <h1 style="display:inline"><font color="#666666" face="Times New Roman, Times, serif" size="+5">Shopping Cart</font></h1><br /><hr />
                 </div>
                 <div class="mycontent">
-                    <a style="color:rgba(51,51,102,1); font-family:'Times New Roman', Times, serif; font-size:30px; font-weight:bold">Checkout My Cart</a><br />
                     <table width="500px">
-                        <%
-                            for (int i = 0; i < it_list.size(); i++) {
-                            	Item itm=(Item)it_list.get(i);
+                    
+                    
+                     <%
+                            //for (int i = 0; i < it_list.size(); i++) {
+                            	//Item itm=(Item)it_list.get(i);
                         %>
+                        
+                      <!-- 
                         <tr>
-                            <td><%out.print(itm.name);%></td> 
-                            <td><%out.print(itm.price);%></td> 
+                            <td><%//out.print(itm.name);%></td> 
+                            <td><%//out.print(itm.price);%></td> 
                         </tr>
-                        <% }%>
+                        <% //}%>
+                    
+                     -->
+                       
+                        
                         <tr>
-                            <td style="font-weight:bold;color:rgba(255,51,51,1)">My Total</td><td style="font-weight:bold;color:rgba(255,51,51,1)">Rs[<%out.print(session.getAttribute("total"));%>]</td>
+                        
+                        
+                    <%
+					try {		
+								
+						Statement stmt=connection.getcon().createStatement();
+						ResultSet rs = stmt.executeQuery("SELECT * FROM cart");
+						ResultSetMetaData rsmd=rs.getMetaData();
+						int numberOfColumns = rsmd.getColumnCount();
+						double pricetot=0;
+						
+						
+						while(rs.next()){							
+							//for(int i=1;i<=numberOfColumns;i++){
+								pricetot+=rs.getDouble(3);
+								
+								 
+							//}
+							
+						}
+						//out.print(pricetot);
+						%>
+						<tr>
+                            <td style="font-weight:bold;color:rgba(255,51,51,1)">My Total</td><td style="font-weight:bold;color:rgba(255,51,51,1)">Rs <%out.print(pricetot);%></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Purchase" /></td>
                         </tr>	
+						
+					<% 
+						
+					} catch (Exception ex) {
+						System.out.println(ex);
+						System.err.println(ex);
+					}
+			
+					%>
+                        
+                        </tr>
                         
                     </table>
                 </div>

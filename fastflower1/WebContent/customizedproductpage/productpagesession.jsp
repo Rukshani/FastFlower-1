@@ -178,7 +178,7 @@
 			<div class="light-bg">
 				<div class="container">
 					<h2>Our services</h2>
-					<p>We cater to government functions and provide flowers and decor at the   most competitive rates. We also specialize in providing flowers and   related services to the rapidly expanding corporate sector in Sri Lanka.   Our service is professional and personalized, and we aim to provide   utmost customer satisfaction with your individual needs in mind. We are   able to provide a variety of floral solutions to multinational   conglomerates, hospitality trade organizations, and locally owned   business undertakings with daily needs of floral d�cor and specified   objectives. Count on us as many do for excellent service, in order to   create a unique and lasting impression.</p>
+					<p>We cater to government functions and provide flowers and decor at the   most competitive rates. We also specialize in providing flowers and   related services to the rapidly expanding corporate sector in Sri Lanka.   Our service is professional and personalized, and we aim to provide   utmost customer satisfaction with your individual needs in mind. We are   able to provide a variety of floral solutions to multinational   conglomerates, hospitality trade organizations, and locally owned   business undertakings with daily needs of floral decor and specified   objectives. Count on us as many do for excellent service, in order to   create a unique and lasting impression.</p>
 					<div class="row-fluid second-service">
 						<article class="span4">
 							<div class="block-icon"></div>
@@ -226,8 +226,10 @@
                     <div class="cartcontent" id="cartdiv">
                         <div class="myitems">
                             <table width="600px">
+                            
+                            <!-- shopping cart table -->
                                 <tr>
-                                    <th>Number</th> 
+                                    <th>Product ID</th> 
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Quantity</th>
@@ -365,38 +367,7 @@
 		</section>
 		
 				
-		
-	<!-- 	<section id="price" class="text-block" data-section="6">
-			<div class="light-bg">
-				<div class="container">
-					<h2>Prices</h2>
-					<div class="row-fluid">	
-						<article class="span4 price-block">
-							<h3>Single purchase</h3>
-							<div class="price-table">
-								<p>Rs<span class="price">10</span></p>
-								<a class="btn btn-large" href="#">Select now</a>
-							</div>	
-						</article>
-						<article class="span4 price-block">	
-							<h3>Multiple purchase</h3>
-							<div class="price-table recommend">
-								<p>Rs<span class="price">50</span></p>
-								<a class="btn btn-large" href="#">Buy now</a>
-							</div>	
-						</article>
-						<article class="span4 price-block">
-							<h3>Extended license</h3>
-							<div class="price-table">
-								<p>Rs<span class="price">500</span></p>
-								<a class="btn btn-large" href="#">Select now</a>
-							</div>	
-						</article>	
-					</div>	
-				</div>	
-			</div>	
-		</section>
-		 -->
+	
 		
 	<section id="contacts" class="text-block" data-section="7">
 			<div class="dark-bg">
