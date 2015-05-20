@@ -137,6 +137,8 @@ document.write(unescape("%3Cscript src='" + gs_p + "s.gstat.orange.fr/lib/gs.js?
 
 
 
+
+
       <div class="container">
         <div class="navbar-header">
         
@@ -167,7 +169,10 @@ document.write(unescape("%3Cscript src='" + gs_p + "s.gstat.orange.fr/lib/gs.js?
 	      <tr><td><input type="text" size="60" name="address2" placeholder="Address Line2"/></td></tr>
 	      <tr><td><input type="datetime" size="60" name="dt" placeholder="Time to be delivered" id="dt"/></td>
 	      	  <td><input type="button" value="Calculate" onclick="calculate()"/></td></tr>
-	      <tr><td id="duetime">Due Time:</td></tr>
+	      <tr><td id="duetime">Due Time:
+	      			
+	      
+	      </td></tr>
 	      <tr><td><input type="text" size="60" name="note" placeholder="Special Note"/></td></tr>
 	      <tr><td><button type="submit" class="btn btn-primary">Save</button></td></tr>
       </p>

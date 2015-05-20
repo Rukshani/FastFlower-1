@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-
 <%@page import="java.sql.ResultSetMetaData"%>
 <%@page import="java.security.interfaces.RSAKey"%>
-<%@page import="fastflower1.requesthandle"%>
+<%@page import="src.fastflower1.requesthandle"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="fastflower1.connection"%>
+<%@page import="src.fastflower1.connection"%>
 <%@page import="java.sql.Statement"%>
-<%@page import="fastflower1.Item"%>
+<%@page import="src.fastflower1.Item"%>
 <%@page import="java.util.ArrayList"%>
 <html style="" class=" js flexbox canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths">
 <head>
@@ -116,7 +115,7 @@
 				</div>	
 			</div>	
 			<div class="light-bg">
-			  <div class="container">
+				<div class="container">
 					<h2>About us</h2>
 					<div class="section clearfix">
 						<p>Fast Flower Delivery is Sri Lanka's largest e-commerce organization. With over 10000 products and over 30 types of distinct services Fast Flower Delivery has set the bar for e-commerce footprint of Sri Lanka. Fast Flower Delivery primary goal to provide a world class service to Sri Lankan's who shop online. Inspired by the truly Sri Lankan tradition Fast Flower Delivery welcomes you for the experience of professional gift delivery service in the international standards.</p>
@@ -158,8 +157,6 @@
 								<iframe src="R/20596477.htm" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" frameborder="0"></iframe>
 							</div>						</div>  -->
 					</div>
-					
-				
 				</div>	
 			</div>	
 		</section>	
@@ -169,7 +166,8 @@
 				<div class="text">
 					<blockquote>
 					  <h2>the earth laughs in flowers</h2>
-						Faster Delivery</blockquote>
+						Faster Delivery
+					</blockquote>
 				</div>
 			</div>	
 		</div>
@@ -212,121 +210,131 @@
 				<div class="container">
 					<h2>Products</h2>
                     
-        <div class="container">
-            <form method="post" action="../requesthandle.jsp">
-                <div class="headbanner">
-                    <h3 style="display:inline">
-                       Shopping Cart 
-                    </h3>
-                </div>
-                <div class="mycontent" id="cart">
-                    <div class="cartof">
-                        <a style="color: #CC3300;"></a>
-                    </div>
-                    <div class="cartcontent" id="cartdiv">
-                        <div class="myitems">
-                            <table width="600px">
-                            
-                            <!-- shopping cart table -->
-                                <tr>
-                                    <th>Product ID</th> 
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Action</th>
-                                </tr>
-                                <%if (session.getAttribute("itemlist") != null) {
-                                        ArrayList mycart = (ArrayList) session.getAttribute("itemlist");
-                                        for (int i =0; i < mycart.size(); i++) {
-                                        	Item it=(Item)mycart.get(i);
-                                %>
-                                <tr>
-                                    <td align="center"><% out.print(it.id);%></td>
-                                    <td align="center"><% out.print(it.name);%></td> 
-                                    <td align="center"><% out.print(it.price);%></td>
-                                    <td align="center"><input type="number" name="quantity" id="quantity"/></td>
-                                    <td align="center"><input name="del" type="submit" value="Delete" onclick="this.value=<%out.print(i);%>"/></td>
-                                </tr>
-                                <%}
-                                    }
-                                %>    
-                            </table>
-                        </div>
-                        <div class="total">
-                            <a>My Total : Rs[<% out.print(session.getAttribute("total"));%>]</a><br />
-                            <a style="font-size:14px">
-                            		Total Qty: [<% ArrayList il = (ArrayList) session.getAttribute("itemlist");
-                       				out.print(il.size());%>]
-                       		</a><br/>
-                            <input name="chkout" type="submit" value="Checkout"/>
-                            <input name="update" type="submit" id="update" value="Update">
-                            <input name="view" type="submit" value="View Cart"/>
-                        </div>
-                    </div>
-                   
-					<%
-					try {		
-								
-						Statement stmt=connection.getcon().createStatement();
-						ResultSet rs = stmt.executeQuery("SELECT * FROM product");
-						ResultSetMetaData rsmd=rs.getMetaData();
-						int numberOfColumns = rsmd.getColumnCount();
-						
-						out.print("<table border=\"1\" width=\"100%\">");
-						out.print("<tr width=\"100%\"><th width=\"10%\">ID</th><th width=\"20%\">Name</th><th width=\"10%\">Price</th><th width=\"10%\">Availability</th><th width=\"30%\">Image</th><th width=\"20%\">Option</th></tr>");
-						
-						while(rs.next()){
-							out.print("<tr>");
+					<div class="container">
+						<form method="post" action="../requesthandle.jsp">
+						<!-- 
+							<div class="headbanner">
 							
-							for(int i=1;i<=numberOfColumns;i++){
-								
-								if(i==5){
-									out.println("<td><center><img src=\"../"+rs.getString(6)+"\" width=\"150\" height=\"100\"></center></td>");
-									continue;
-								}
-							 
-								if(i==6){
-									out.println("<td><Button name=\"addtocart\" type=\"submit\" value=\""+rs.getString(1)+"\" onclick=\"loadXMLDoc()\">Add to Cart</Button></td>");
+								<h3 style="display:inline">
+								   Shopping Cart 
+								</h3>
+							</div>
+							
+							 -->
+							<div class="mycontent" id="cart">
+								<div class="cartof">
+									<a style="color: #CC3300;"></a>
+								</div>
+								<div class="cartcontent" id="cartdiv">
+									<div class="myitems">
 									
-									continue;
-									/* <form method=\"post\" action=\"../addtodbcart\"> */
+							<!--
+								<table width="600px">
+										
+										
+											<tr>
+												<th>Product ID</th> 
+												<th>Name</th>
+												<th>Price</th>
+											</tr>
+											<%/*if (session.getAttribute("itemlist") != null) {
+													ArrayList mycart = (ArrayList) session.getAttribute("itemlist");
+													for (int i =0; i < mycart.size(); i++) {
+														Item it=(Item)mycart.get(i);*/
+											%>
+											<tr>
+												<td align="center"><%// out.print(it.id);%></td>
+												<td align="center"><%// out.print(it.name);%></td> 
+												<td align="center"><%// out.print(it.price);%></td>                                   
+												
+											</tr>
+											<%	//	}
+										   //}
+											%>    
+								</table>
+								  -->
+								
+								
+								</div>
+									<div class="total">
+									
+									<!--
+										<a>My Total : Rs[<% //out.print(session.getAttribute("total"));%>]</a><br />
+										<a style="font-size:14px">
+												Total Qty: [<% //ArrayList il = (ArrayList) session.getAttribute("itemlist");
+												//out.print(il.size());%>]
+										</a><br/>
+										  -->
+										
+									<!-- 	<input name="chkout" type="submit" value="Checkout"/>
+										<input name="update" type="submit" id="update" value="Update">  -->
+										<input name="view" type="submit" value="View Cart"/>
+									</div>
+								</div>
+							   
+								<%
+								try {		
+											
+									Statement stmt=connection.getcon().createStatement();
+									ResultSet rs = stmt.executeQuery("SELECT * FROM product");
+									ResultSetMetaData rsmd=rs.getMetaData();
+									int numberOfColumns = rsmd.getColumnCount();
+									
+									out.print("<table border=\"1\" width=\"100%\">");
+									out.print("<tr width=\"100%\"><th width=\"10%\">ID</th><th width=\"20%\">Name</th><th width=\"10%\">Price</th><th width=\"10%\">Availability</th><th width=\"30%\">Image</th><th width=\"10%\">Quantity</th><th width=\"20%\">Option</th></tr>");
+									
+									while(rs.next()){
+										out.print("<tr>");
+										
+										for(int i=1;i<=numberOfColumns;i++){
+											
+											if(i==5){
+												out.println("<td><center><img src=\"../"+rs.getString(6)+"\" width=\"150\" height=\"100\"></center></td>");
+												continue;
+											}
+										 
+											if(i==6){
+												out.println("<td><input id=\"quantity\" name=\"quantity\" type=\"text\"</td>");
+												continue;
+											}
+											if(i==7){
+												out.println("<td><Button name=\"addtocart\" type=\"submit\" value=\""+rs.getString(1)+"\" onclick=\"loadXMLDoc()\">Add to Cart</Button></td>");												
+												continue;
+												/* <form method=\"post\" action=\"../addtodbcart\"> */
+											}
+											
+											 out.print("<td>"+rs.getString(i)+"</td>");
+											 
+									}
+									out.print("</tr>");
+									
+									}
+									out.print("</table>");
+									
+								} catch (Exception ex) {
+									System.out.println(ex);
+									System.err.println(ex);
 								}
-								if(i==7){
-									continue;
-								}
-								 out.print("<td>"+rs.getString(i)+"</td>");
-								 
-						}
-						out.print("</tr>");
+								
+								
 						
-						}
-						out.print("</table>");
-						
-					} catch (Exception ex) {
-						System.out.println(ex);
-						System.err.println(ex);
-					}
-			
-					%>
-			                    
-                    	<!-- First name:<br>
-						<input id="first" type="text" name="firstname">
-						<br>
-						Last name:<br>
-						<input id="last" type="text" name="lastname">
-						<br>
-						<button type="button" onclick="loadXMLDoc()">Change Content</button>
-						<div id="myDiv"><h2>Let AJAX change this text</h2></div>
-                     -->
-                    
-                    
-                 
-                </div>
-               
-            </form>
- 		</div>		 
-        </div>
-        </div>
+								%>
+											
+									<!-- First name:<br>
+									<input id="first" type="text" name="firstname">
+									<br>
+									Last name:<br>
+									<input id="last" type="text" name="lastname">
+									<br>
+									<button type="button" onclick="loadXMLDoc()">Change Content</button>
+									<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+								 -->
+							
+							</div>						   
+						</form>
+					</div>		 
+				</div>
+			</div>
         </section>
 		
 		
@@ -364,104 +372,105 @@
 					</div>	
 				</div>	
 			</div>	
-		</section>
-		
+		</section>	
 				
 	
 		
-	<section id="contacts" class="text-block" data-section="7">
-			<div class="dark-bg">
-				<div class="container">
-					<h2>Keep in touch</h2>
-					<div class="row-fluid section">
-						<div class="span8">
-							<h3 class="with-border">Questions???</h3>
-							<form class="form clearfix" action="">
-								<input class="span12" placeholder="Name" name="name" type="text">
-								<input class="span12" placeholder="Email" name="email" type="email">
-								<input class="span12" placeholder="Subject" name="subject" type="text">
-								<textarea class="span12" placeholder="Message" name="message" rows="6"></textarea>
-								<button class="btn btn-large pull-right" type="submit">Submit</button>
-							</form>
+		<section id="contacts" class="text-block" data-section="7">
+				<div class="dark-bg">
+					<div class="container">
+						<h2>Keep in touch</h2>
+						<div class="row-fluid section">
+							<div class="span8">
+								<h3 class="with-border">Questions???</h3>
+								<form class="form clearfix" action="">
+									<input class="span12" placeholder="Name" name="name" type="text">
+									<input class="span12" placeholder="Email" name="email" type="email">
+									<input class="span12" placeholder="Subject" name="subject" type="text">
+									<textarea class="span12" placeholder="Message" name="message" rows="6"></textarea>
+									<button class="btn btn-large pull-right" type="submit">Submit</button>
+								</form>
+							</div>
+							<div class="span4">
+								<h3 class="with-border">Our information</h3>
+								<div class="info-block">
+									<article class="clearfix">
+										<address>
+											Katubedda,<br>
+											Moratuwa	
+										</address>
+									</article>
+									<article class="clearfix">
+										
+										<p>0712223334</p>
+									</article>
+									<article class="clearfix">	
+										
+										<p><a href="#">fastflower@gmail.com</a></p>
+									</article>	
+								</div>	
+							</div>
 						</div>
-						<div class="span4">
-							<h3 class="with-border">Our information</h3>
-							<div class="info-block">
-								<article class="clearfix">
-									<address>
-										Katubedda,<br>
-										Moratuwa	
-									</address>
-								</article>
-								<article class="clearfix">
-									
-									<p>0712223334</p>
-								</article>
-								<article class="clearfix">	
-									
-									<p><a href="#">fastflower@gmail.com</a></p>
-								</article>	
-							</div>	
-						</div>
-					</div>
+					</div>	
 				</div>	
-			</div>	
-		</section>
-		<footer>
-			<div class="light-bg">
-				<div class="container">
-					<div class="row-fluid">
-						<div class="span3">
-							<h4>Keep in touch</h4>
-							<div class="info-block">
-								<article class="clearfix">
-									<address>
-										Katubedda,<br>
-										Moratuwa	
-									</address>
-								</article>
-								<article class="clearfix">
-									<p>0712223334</p>
-								</article>
-								<article class="clearfix">
-									<p><a href="#">fastflower@gmail.com</a></p>
-								</article>	
-							</div>	
-						</div>
-						<div class="span3">
-							<h4>Follow us</h4>
-							<div class="social">
-								<ul class="unstyled clearfix">
-									<li>
-										<a target="_blank" title="Facebook" href="http://facebook.com"></a>
-									</li>
-									<li>
-										<a target="_blank" title="Twitter" href="http://twitter.com"></a>
-									</li>
-									<li>
-										<a target="_blank" title="Instagram" href="http://instagram.com"></a>
-									</li>
-									<li>
-										<a target="_blank" title="Gmail" href="http://gmail.com"></a>
-									</li>
+			</section>
+			
+			
+			<footer>
+				<div class="light-bg">
+					<div class="container">
+						<div class="row-fluid">
+							<div class="span3">
+								<h4>Keep in touch</h4>
+								<div class="info-block">
+									<article class="clearfix">
+										<address>
+											Katubedda,<br>
+											Moratuwa	
+										</address>
+									</article>
+									<article class="clearfix">
+										<p>0712223334</p>
+									</article>
+									<article class="clearfix">
+										<p><a href="#">fastflower@gmail.com</a></p>
+									</article>	
+								</div>	
+							</div>
+							<div class="span3">
+								<h4>Follow us</h4>
+								<div class="social">
+									<ul class="unstyled clearfix">
+										<li>
+											<a target="_blank" title="Facebook" href="http://facebook.com"></a>
+										</li>
+										<li>
+											<a target="_blank" title="Twitter" href="http://twitter.com"></a>
+										</li>
+										<li>
+											<a target="_blank" title="Instagram" href="http://instagram.com"></a>
+										</li>
+										<li>
+											<a target="_blank" title="Gmail" href="http://gmail.com"></a>
+										</li>
+									</ul>
+								</div>	
+							</div>
+							<div class="span3">
+								<h4>Recent posts</h4>
+								<ul>
+									<li><a href="#">A</a></li>
+									<li><a href="#">B</a></li>
+									<li><a href="#">C</a></li>
+									<li><a href="#">D</a></li>
+									<li><a href="#">E</a></li>
+									<li><a href="#">F</a></li>
 								</ul>
-							</div>	
+							</div>
 						</div>
-						<div class="span3">
-							<h4>Recent posts</h4>
-							<ul>
-								<li><a href="#">A</a></li>
-								<li><a href="#">B</a></li>
-								<li><a href="#">C</a></li>
-								<li><a href="#">D</a></li>
-								<li><a href="#">E</a></li>
-								<li><a href="#">F</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>	
-		  </div>		
-	</footer>
+					</div>	
+			  </div>		
+		</footer>
 		
 		<a style="display: none;" class="goTop goTop-link"></a>
 		
@@ -471,11 +480,11 @@
 		<script src="R/waypoints.js"></script>
         <script src="R/plugins.js"></script>
 		<script src="R/jquery.js"></script>
-        <script src="R/main.js"></script>
-        
+        <script src="R/main.js"></script>       
         
 			    
 
 <div style="display: none;" id="cboxOverlay"></div><div style="display: none;" tabindex="-1" role="dialog" class="" id="colorbox"><div id="cboxWrapper"><div><div style="float: left;" id="cboxTopLeft"></div><div style="float: left;" id="cboxTopCenter"></div><div style="float: left;" id="cboxTopRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxMiddleLeft"></div><div style="float: left;" id="cboxContent"><div style="float: left;" id="cboxTitle"></div><div style="float: left;" id="cboxCurrent"></div><button id="cboxPrevious" type="button"></button><button id="cboxNext" type="button"></button><button id="cboxSlideshow"></button><div style="float: left;" id="cboxLoadingOverlay"></div><div style="float: left;" id="cboxLoadingGraphic"></div></div><div style="float: left;" id="cboxMiddleRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxBottomLeft"></div><div style="float: left;" id="cboxBottomCenter"></div><div style="float: left;" id="cboxBottomRight"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none; max-width: none;"></div></div>
 
-</body></html>
+</body>
+</html>

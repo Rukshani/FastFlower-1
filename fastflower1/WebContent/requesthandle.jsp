@@ -39,7 +39,7 @@
 	        
 	        String c= request.getParameter("addtocart");
 	        String chk = request.getParameter("chkout");	        
-	        String view=request.getParameter("view");
+	       	String view=request.getParameter("view");
 	        String logout = request.getParameter("logout");
 	        String pressdel = request.getParameter("del");
 	        String username=session.getAttribute("usermail").toString();
@@ -54,8 +54,9 @@
 				st.setString(1, c);
 				ResultSet rss=st.executeQuery();
 	        	
-				System.out.println(" "+c);
-				System.out.println(u+" "+quantity);
+				System.out.println("itemid "+c);
+				//System.out.println(u+" "+quantity);
+				System.out.println("quantity22222 :"+quantity);
 				
 							
 				while(rss.next()){
@@ -69,8 +70,7 @@
 			            mysession.setAttribute("itemlist", mycart);
 			            mysession.setAttribute("total", value);
 			            
-			            st.executeUpdate("INSERT INTO  cart(productID,price,qty,customerMail) VALUES("+rss.getString(1)+","+rss.getString(3)+","+rss.getString(4)+",'"+username+"')");
-							            
+			            st.executeUpdate("INSERT INTO  cart(productID,price,qty,customerMail) VALUES("+rss.getString(1)+","+rss.getString(3)+",'"+quantity+"','"+username+"')");		            
 						
 			            response.sendRedirect("customizedproductpage/productpagesession.jsp");
 			       						
@@ -104,10 +104,11 @@
 	            mysession.setAttribute("tod", pressdel);
 
 	            response.sendRedirect("customizedproductpage/productpagesession.jsp");
-	        } else if(view!=null){
+	            
+	        }else if(view!=null){
+	        	System.out.println("quantity"+quantity);
 	        	
-	        	response.sendRedirect("customizedproductpage/mycartview.jsp");
-	        	
+	        	response.sendRedirect("customizedproductpage/mycartview.jsp");	        	
 				
 	        }
 	 

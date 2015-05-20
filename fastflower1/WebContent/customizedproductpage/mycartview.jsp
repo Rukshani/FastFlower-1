@@ -28,7 +28,13 @@
 					</nav>
 					<div id="main">
 					  <article class="panel" id="me" name="me">
-					  	
+					  <form method="post" action="../requesthandle.jsp">
+						  <input name="chkout" type="submit" value="Checkout"/>
+					</form>
+					
+					<form method="post" action="../updatecart.jsp">						  
+						  <input name="update" type="submit" id="update" value="Update">						  
+					</form>					  	
                        	
                        	<form method="post" action="../deleteproduct.jsp">
                        	<p>
@@ -49,11 +55,17 @@
         					out.print("<tr>");
         					
         					for(int i=1;i<=numberOfColumns;i++){
+        						
         						if(i==5){
         							out.println("<td align=\"center\"><Button name=\"delete\" type=\"submit\" value=\""+rsv.getString(1)+"\" onclick=\"loadXMLDoc()\">Delete</Button></td>");
         							//System.out.println("orderid: "+rsv.getString(1));
+        							System.out.println("product id :"+rsv.getString(2));
+        							String productID=rsv.getString(2);
+        							session.setAttribute("productID",productID);
+        							
         							continue;
         						}
+        						
         						out.print("<td align=\"center\"><font color=\"0000ff\">"+rsv.getString(i)+"</font></td>");
         					}
         				out.print("</tr>");        				
@@ -61,9 +73,13 @@
         				out.print("</table>");
 						%>		
 						</p>					
-					</form>
+					</form>		
 					
+					<% 
+					Object productID=session.getAttribute("productID");
+					System.out.println("product id from session"+productID);		
 					
+					%>
 					
                          
 					  </article>

@@ -4,6 +4,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="fastflower1.Item"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.sql.PreparedStatement"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -56,18 +57,25 @@
                         
                         
                     <%
-					try {		
+					try {	
+						
+						String username=session.getAttribute("usermail").toString();
+                        PreparedStatement stv=connection.getcon().prepareStatement("select * from cart where customermail=?");
+        				stv.setString(1,username);
+        				ResultSet rsv=stv.executeQuery();
 								
-						Statement stmt=connection.getcon().createStatement();
-						ResultSet rs = stmt.executeQuery("SELECT * FROM cart");
-						ResultSetMetaData rsmd=rs.getMetaData();
+						//Statement stmt=connection.getcon().createStatement();
+						//ResultSet rs = stmt.executeQuery("SELECT * FROM cart");
+						ResultSetMetaData rsmd=rsv.getMetaData();
 						int numberOfColumns = rsmd.getColumnCount();
 						double pricetot=0;
 						
 						
-						while(rs.next()){							
+						while(rsv.next()){							
 							//for(int i=1;i<=numberOfColumns;i++){
-								pricetot+=rs.getDouble(3);
+								int quantity=rsv.getInt(4);
+								System.out.println("quantity from check: "+quantity);
+								pricetot=rsv.getDouble(3)*quantity;
 								
 								 
 							//}
@@ -89,6 +97,84 @@
 						System.err.println(ex);
 					}
 			
+					%>
+					
+					<% 
+					
+
+					Object productID=session.getAttribute("productID");
+					String sproductID=(String)productID;
+					System.out.println("product id from session from checkoutttt page"+sproductID);	
+					
+					
+					try {	
+							
+						//String username=session.getAttribute("usermail").toString();
+                        PreparedStatement stp=connection.getcon().prepareStatement("select * from cart where productID=?");
+        				stp.setObject(1,sproductID);
+        				ResultSet rsp=stp.executeQuery();
+
+						ResultSetMetaData rsmd=rsp.getMetaData();
+						int numberOfColumns = rsmd.getColumnCount();
+						double pricetot=0;
+						
+						
+						while(rsp.next()){	
+							String quantity=rsp.getString(4);
+							session.setAttribute("quantity",quantity);
+							
+							
+							
+							
+							System.out.println("rsp value:"+rsp.getString(4));
+														
+						}
+					
+						
+					} catch (Exception ex) {
+						System.out.println(ex);
+						System.err.println(ex);
+					}
+					
+						
+					
+					%>
+					
+					<%
+					
+					/*
+					Object quantityy=session.getAttribute("quantity");
+					System.out.println("quantity from session : "+quantityy);
+								
+					
+					System.out.println("product id second print:"+sproductID);
+					
+						try {	
+						
+						String username=session.getAttribute("usermail").toString();
+                        PreparedStatement stv=connection.getcon().prepareStatement("select * from product where itemID=?");
+        				stv.setString(1,username);
+        				ResultSet rsv=stv.executeQuery();
+								
+						ResultSetMetaData rsmd=rsv.getMetaData();
+						int numberOfColumns = rsmd.getColumnCount();
+						double pricetot=0;
+						
+						
+						while(rsv.next()){							
+							
+							
+						}
+					
+						
+					} catch (Exception ex) {
+						System.out.println(ex);
+						System.err.println(ex);
+					}
+			
+					
+					*/
+					
 					%>
                         
                         </tr>
